@@ -78,14 +78,6 @@ DELETE FROM Faculty
 WHERE faculty_id = 5;
 
 
--- ====================================
--- MEMBER D: COURSES TABLE TASKS
--- ====================================
--- =========================================================================
--- INDIVIDUAL TASKS: MEMBER D (COURSES)
--- =========================================================================
-
--- CREATE TABLE Statement (Tasks 1, 2, 3)
 CREATE TABLE Courses (
     course_id INT,
     course_name VARCHAR(100) NOT NULL,
@@ -97,7 +89,6 @@ CREATE TABLE Courses (
     FOREIGN KEY (classroom_id) REFERENCES classroom(classroom_id)
 );
 
--- INSERT Statement (Task 4)
 INSERT INTO Courses (course_id, course_name, credits, faculty_id, classroom_id) VALUES
 (501, 'Introduction to Linux', 4, 1, 101),
 (502, 'Database Management Systems', 3, 2, 102),
