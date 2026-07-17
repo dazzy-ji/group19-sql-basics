@@ -99,11 +99,12 @@ INSERT INTO Courses (course_id, course_name, credits, faculty_id, classroom_id) 
 (504, 'Data Structures and Algorithms', 4, 1, 102),
 (505, 'Self Leadership', 2, 4, 104);
 
--- UPDATE and DELETE Statements (Task 5)
+-- Philip Otieno
 UPDATE Courses SET credits = 4 WHERE course_id = 502;
+-- Philip Otieno
 DELETE FROM Courses WHERE course_id = 505;
 
--- SELECT Statement (Task 6)
+-- Philip Otieno
 SELECT course_id, course_name, credits FROM Courses WHERE credits >= 3;
 
 
