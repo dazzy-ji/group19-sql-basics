@@ -128,39 +128,6 @@ DELETE FROM Extra_Curricular_Activities WHERE activity_id = 605;
 
 SELECT activity_id, activity_name, category, faculty_advisor_id FROM Extra_Curricular_Activities WHERE category = 'Academic';
 
-
-CREATE TABLE Student_Courses (
-    student_id INT,
-    course_id INT,
-    enrollment_date DATE,
-    PRIMARY KEY (student_id, course_id),
-    FOREIGN KEY (student_id) REFERENCES Students(student_id),
-    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
-);
-
-INSERT INTO Student_Courses (student_id, course_id, enrollment_date) VALUES
-(1, 501, '2026-01-15'),
-(1, 502, '2026-01-15'),
-(2, 501, '2026-01-16'),
-(3, 503, '2026-01-16'),
-(4, 504, '2026-01-17');
-
-CREATE TABLE Student_Activities (
-    student_id INT,
-    activity_id INT,
-    join_date DATE,
-    PRIMARY KEY (student_id, activity_id),
-    FOREIGN KEY (student_id) REFERENCES Students(student_id),
-    FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id)
-);
-
-INSERT INTO Student_Activities (student_id, activity_id, join_date) VALUES
-(1, 601, '2026-01-20'),
-(2, 602, '2026-01-21'),
-(3, 603, '2026-01-21'),
-(4, 604, '2026-01-22'),
-(5, 601, '2026-01-22');
-
 -- ====================================
 -- MEMBER E (Eddy): JUNCTION TABLES
 -- Student_Courses + Student_Activities
