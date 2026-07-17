@@ -31,3 +31,30 @@ INSERT INTO Students(student_id, name, email, classroom_id, enrollment_date) VAL
 (004, 'Philip Otieno', 'p.otieno@alustudent.com', 104, '2026-01-09'),
 (005, 'Arif Antulay', 'a.antulay@alustudent.com', 102, '2026-01-10'),
 (006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 105, '2026-01-06');
+
+CREATE TABLE IF NOT EXISTS Faculty (
+	faculty_id INT,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	department VARCHAR(100) NOT NULL,
+	PRIMARY KEY (faculty_id)
+);
+
+INSERT INTO Faculty (faculty_id, first_name, last_name, email, department) VALUES
+(1, 'Obechukwu', 'Cynthia', 'c.obechukwu@alueducation.com', 'Foundations'),
+(2, 'Charisma', 'Bazing', 'c.bazing@alueducation.com', 'Health'),
+(3, 'Matilda', 'Bonaventura', 'm.bonaventura@alueducation.com', 'Finance'),
+(4, 'Mbavu', 'Destroyer', 'm.destroyer@alueducation.com', 'Vurugu'),
+(5, 'Mosiria', 'Majembe', 'm.majembe@alueducation.com', 'Security');
+
+SELECT faculty_id, first_name, last_name, email, department
+FROM Faculty
+WHERE department = 'Vurugu';
+
+UPDATE Faculty
+SET department = 'Software Engineering'
+WHERE faculty_id = 4;
+
+DELETE FROM Faculty
+WHERE faculty_id = 5;
