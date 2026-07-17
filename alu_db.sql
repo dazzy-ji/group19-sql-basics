@@ -18,6 +18,8 @@ VALUES
 UPDATE classroom
 SET capacity = 120
 WHERE classroom_id = 104;
+
+SELECT * FROM classroom;
 =======
 
 CREATE Table Students(
