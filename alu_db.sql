@@ -48,19 +48,16 @@ INSERT INTO Faculty (faculty_id, first_name, last_name, email, department) VALUE
 (4, 'Mbavu', 'Destroyer', 'm.destroyer@alueducation.com', 'Vurugu'),
 (5, 'Mosiria', 'Majembe', 'm.majembe@alueducation.com', 'Security');
 
--- =====================================================================
--- MEMBER C: FACULTY QUERIES
--- WRITTEN BY: [Your First and Last Name]
--- =====================================================================
-
+-- Isaack Muiruri Kariuki
 SELECT faculty_id, first_name, last_name, email, department
 FROM Faculty
 WHERE department = 'Vurugu';
 
+-- Isaack Muiruri Kariuki
 UPDATE Faculty
 SET department = 'Software Engineering'
 WHERE faculty_id = 4;
 
--- Fixed: Added the WHERE clause back so you don't empty the whole table!
+-- Isaack Muiruri Kariuki
 DELETE FROM Faculty
 WHERE faculty_id = 5;
