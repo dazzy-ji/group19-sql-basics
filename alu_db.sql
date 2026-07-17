@@ -32,6 +32,18 @@ INSERT INTO Students(student_id, name, email, classroom_id, enrollment_date) VAL
 (005, 'Arif Antulay', 'a.antulay@alustudent.com', 102, '2026-01-10'),
 (006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 105, '2026-01-06');
 
+-- Dazzy Indimuli
+UPDATE Students 
+SET name = 'David Wanjiku'
+WHERE student_id = 002;
+-- Dazzy Indimuli
+DELETE FROM Students 
+WHERE student_id = 006;
+-- Dazzy Indimuli
+SELECT student_id, student_name, enrollment_date 
+FROM Students
+WHERE student_id = 001;
+
 CREATE TABLE IF NOT EXISTS Faculty (
 	faculty_id INT,
 	first_name VARCHAR(50) NOT NULL,
@@ -48,6 +60,11 @@ INSERT INTO Faculty (faculty_id, first_name, last_name, email, department) VALUE
 (4, 'Mbavu', 'Destroyer', 'm.destroyer@alueducation.com', 'Vurugu'),
 (5, 'Mosiria', 'Majembe', 'm.majembe@alueducation.com', 'Security');
 
+-- =====================================================================
+-- MEMBER C: FACULTY QUERIES
+-- WRITTEN BY: [Your First and Last Name]
+-- =====================================================================
+
 SELECT faculty_id, first_name, last_name, email, department
 FROM Faculty
 WHERE department = 'Vurugu';
@@ -56,6 +73,7 @@ UPDATE Faculty
 SET department = 'Software Engineering'
 WHERE faculty_id = 4;
 
+-- Fixed: Added the WHERE clause back so you don't empty the whole table!
 DELETE FROM Faculty
 WHERE faculty_id = 5;
 
@@ -87,11 +105,12 @@ INSERT INTO Courses (course_id, course_name, credits, faculty_id, classroom_id) 
 (504, 'Data Structures and Algorithms', 4, 1, 102),
 (505, 'Self Leadership', 2, 4, 104);
 
--- UPDATE and DELETE Statements (Task 5)
+-- Philip Otieno
 UPDATE Courses SET credits = 4 WHERE course_id = 502;
+-- Philip Otieno
 DELETE FROM Courses WHERE course_id = 505;
 
--- SELECT Statement (Task 6)
+-- Philip Otieno
 SELECT course_id, course_name, credits FROM Courses WHERE credits >= 3;
 
 
