@@ -117,3 +117,97 @@ UPDATE Extra_Curricular_Activities SET category = 'STEM' WHERE activity_id = 603
 DELETE FROM Extra_Curricular_Activities WHERE activity_id = 605;
 
 SELECT activity_id, activity_name, category, faculty_advisor_id FROM Extra_Curricular_Activities WHERE category = 'Academic';
+
+
+CREATE TABLE Student_Courses (
+    student_id INT,
+    course_id INT,
+    enrollment_date DATE,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+
+INSERT INTO Student_Courses (student_id, course_id, enrollment_date) VALUES
+(1, 501, '2026-01-15'),
+(1, 502, '2026-01-15'),
+(2, 501, '2026-01-16'),
+(3, 503, '2026-01-16'),
+(4, 504, '2026-01-17');
+
+CREATE TABLE Student_Activities (
+    student_id INT,
+    activity_id INT,
+    join_date DATE,
+    PRIMARY KEY (student_id, activity_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id)
+);
+
+INSERT INTO Student_Activities (student_id, activity_id, join_date) VALUES
+(1, 601, '2026-01-20'),
+(2, 602, '2026-01-21'),
+(3, 603, '2026-01-21'),
+(4, 604, '2026-01-22'),
+(5, 601, '2026-01-22');
+
+-- ====================================
+-- MEMBER E (Eddy): JUNCTION TABLES
+-- Student_Courses + Student_Activities
+-- ====================================
+
+-- ---------- STUDENT_COURSES ----------
+CREATE TABLE Student_Courses (
+    student_id INT,
+    course_id INT,
+    enrollment_date DATE,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+
+-- INSERT (5+ rows)
+INSERT INTO Student_Courses (student_id, course_id, enrollment_date) VALUES
+(1, 501, '2026-01-10'),
+(1, 502, '2026-01-10'),
+(2, 501, '2026-01-11'),
+(3, 503, '2026-01-09'),
+(4, 504, '2026-01-12'),
+(5, 502, '2026-01-13');
+
+-- UPDATE
+UPDATE Student_Courses SET enrollment_date = '2026-01-15' WHERE student_id = 1 AND course_id = 501;
+
+-- DELETE
+DELETE FROM Student_Courses WHERE student_id = 5 AND course_id = 502;
+
+-- SELECT with WHERE
+SELECT * FROM Student_Courses WHERE course_id = 501;
+
+
+-- ---------- STUDENT_ACTIVITIES ----------
+CREATE TABLE Student_Activities (
+    student_id INT,
+    activity_id INT,
+    join_date DATE,
+    PRIMARY KEY (student_id, activity_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id)
+);
+
+-- INSERT (5+ rows)
+INSERT INTO Student_Activities (student_id, activity_id, join_date) VALUES
+(1, 601, '2026-01-10'),
+(2, 602, '2026-01-11'),
+(3, 603, '2026-01-09'),
+(4, 604, '2026-01-12'),
+(6, 601, '2026-01-14');
+
+-- UPDATE
+UPDATE Student_Activities SET join_date = '2026-01-16' WHERE student_id = 6 AND activity_id = 601;
+
+-- DELETE
+DELETE FROM Student_Activities WHERE student_id = 4 AND activity_id = 604;
+
+-- SELECT with WHERE
+SELECT * FROM Student_Activities WHERE activity_id = 601;
