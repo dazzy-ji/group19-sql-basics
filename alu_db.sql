@@ -32,6 +32,18 @@ INSERT INTO Students(student_id, name, email, classroom_id, enrollment_date) VAL
 (005, 'Arif Antulay', 'a.antulay@alustudent.com', 102, '2026-01-10'),
 (006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 105, '2026-01-06');
 
+-- Dazzy Indimuli
+UPDATE Students 
+SET name = 'David Wanjiku'
+WHERE student_id = 002;
+-- Dazzy Indimuli
+DELETE FROM Students 
+WHERE student_id = 006;
+-- Dazzy Indimuli
+SELECT student_id, student_name, enrollment_date 
+FROM Students
+WHERE student_id = 001;
+
 CREATE TABLE IF NOT EXISTS Faculty (
 	faculty_id INT,
 	first_name VARCHAR(50) NOT NULL,
