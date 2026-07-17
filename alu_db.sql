@@ -1,5 +1,5 @@
 CREATE DATABASE ALU_DATABASE;
-
+USE ALU_DATABASE;
 CREATE TABLE classroom(
     classroom_id INT PRIMARY KEY,
     room_number VARCHAR(10),
@@ -41,8 +41,8 @@ INSERT INTO Students(student_id, name, email, classroom_id, enrollment_date) VAL
 (003, 'Isaack Kariuki', 'i.kariuki@alustudent.com', 103, '2026-01-08'),
 (004, 'Philip Otieno', 'p.otieno@alustudent.com', 104, '2026-01-09'),
 (005, 'Arif Antulay', 'a.antulay@alustudent.com', 102, '2026-01-10'),
-(006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 105, '2026-01-06'),
-(007, 'Majembe Wanjala', 'm.wanjal@alustudent.com', 105, '2026-02-01');
+(006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 102, '2026-01-06'),
+(007, 'Majembe Wanjala', 'm.wanjal@alustudent.com', 102, '2026-02-01');
 
 -- Dazzy Indimuli
 UPDATE Students 
@@ -52,7 +52,7 @@ WHERE student_id = 002;
 DELETE FROM Students 
 WHERE student_id = 007;
 -- Dazzy Indimuli
-SELECT student_id, student_name, enrollment_date 
+SELECT student_id, name, enrollment_date 
 FROM Students
 WHERE student_id = 001;
 
