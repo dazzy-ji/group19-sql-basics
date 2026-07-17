@@ -95,7 +95,7 @@ DELETE FROM Courses WHERE course_id = 505;
 SELECT course_id, course_name, credits FROM Courses WHERE credits >= 3;
 
 
-
+--------MEMBER E (EXTRA-CURRICULAR) -> ARIF ANTULAY ---------
 CREATE TABLE Extra_Curricular_Activities (
 	activity_id INT PRIMARY KEY,
 	activity_name VARCHAR(100),
