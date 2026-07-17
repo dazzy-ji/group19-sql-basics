@@ -93,3 +93,21 @@ DELETE FROM Courses WHERE course_id = 505;
 
 -- SELECT Statement (Task 6)
 SELECT course_id, course_name, credits FROM Courses WHERE credits >= 3;
+
+
+
+CREATE TABLE Extra_Curricular_Activities (
+	activity_id INT PRIMARY KEY,
+	activity_name VARCHAR(100),
+	category VARCHAR(50),
+	faculty_advisor_id INT,
+	FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
+);
+
+INSERT INTO Extra_Curricular_Activities (activity_id, activity_name, category, faculty_advisor_id)
+VALUES
+(601, 'Debate Club',   'Academic',     1),
+(602, 'Football Team', 'Sports',       2),
+(603, 'Coding Club',   'Technology',   4),
+(604, 'Art Society',   'Creative',     3),
+(605, 'Chess Club',    'Recreational', 1);
