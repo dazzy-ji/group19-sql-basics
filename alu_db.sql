@@ -13,5 +13,7 @@ VALUES
 (104, '4d', 'NIGERIA', 105),
 (105, '5e', 'TANZANIA', 20);
 
-
+UPDATE classroom
+SET capacity = 120
+WHERE classroom_id = 104;
 
