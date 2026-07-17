@@ -14,6 +14,17 @@ VALUES
 (104, '4d', 'NIGERIA', 105),
 (105, '5e', 'TANZANIA', 20);
 
+#update by David Ngure
+UPDATE classroom
+SET capacity = 120
+WHERE classroom_id = 104;
+
+#select David Ngure
+SELECT * FROM classroom;
+
+#Delete  by David ngure
+DELETE FROM classroom
+WHERE classroom_id = 105;
 
 CREATE Table Students(
     student_id INT PRIMARY KEY,
@@ -30,7 +41,8 @@ INSERT INTO Students(student_id, name, email, classroom_id, enrollment_date) VAL
 (003, 'Isaack Kariuki', 'i.kariuki@alustudent.com', 103, '2026-01-08'),
 (004, 'Philip Otieno', 'p.otieno@alustudent.com', 104, '2026-01-09'),
 (005, 'Arif Antulay', 'a.antulay@alustudent.com', 102, '2026-01-10'),
-(006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 105, '2026-01-06');
+(006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 105, '2026-01-06'),
+(007, 'Majembe Wanjala', 'm.wanjal@alustudent.com', 105, '2026-02-01');
 
 -- Dazzy Indimuli
 UPDATE Students 
@@ -38,7 +50,7 @@ SET name = 'David Wanjiku'
 WHERE student_id = 002;
 -- Dazzy Indimuli
 DELETE FROM Students 
-WHERE student_id = 006;
+WHERE student_id = 007;
 -- Dazzy Indimuli
 SELECT student_id, student_name, enrollment_date 
 FROM Students
@@ -59,21 +71,17 @@ INSERT INTO Faculty (faculty_id, first_name, last_name, email, department) VALUE
 (3, 'Matilda', 'Bonaventura', 'm.bonaventura@alueducation.com', 'Finance'),
 (4, 'Mbavu', 'Destroyer', 'm.destroyer@alueducation.com', 'Vurugu'),
 (5, 'Mosiria', 'Majembe', 'm.majembe@alueducation.com', 'Security');
-
--- =====================================================================
--- MEMBER C: FACULTY QUERIES
--- WRITTEN BY: [Your First and Last Name]
--- =====================================================================
-
+-- Isaack Kariuki
 SELECT faculty_id, first_name, last_name, email, department
 FROM Faculty
 WHERE department = 'Vurugu';
 
+-- Isaack Kariuki
 UPDATE Faculty
 SET department = 'Software Engineering'
 WHERE faculty_id = 4;
 
--- Fixed: Added the WHERE clause back so you don't empty the whole table!
+-- Isaack Kariuki
 DELETE FROM Faculty
 WHERE faculty_id = 5;
 
@@ -143,7 +151,6 @@ CREATE TABLE Student_Courses (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
 );
 
--- INSERT (5+ rows)
 INSERT INTO Student_Courses (student_id, course_id, enrollment_date) VALUES
 (1, 501, '2026-01-10'),
 (1, 502, '2026-01-10'),
@@ -172,7 +179,6 @@ CREATE TABLE Student_Activities (
     FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id)
 );
 
--- INSERT (5+ rows)
 INSERT INTO Student_Activities (student_id, activity_id, join_date) VALUES
 (1, 601, '2026-01-10'),
 (2, 602, '2026-01-11'),
@@ -188,3 +194,66 @@ DELETE FROM Student_Activities WHERE student_id = 4 AND activity_id = 604;
 
 -- SELECT with WHERE
 SELECT * FROM Student_Activities WHERE activity_id = 601;
+
+-- Join 1: "Student X is enrolled in Course Y, taught by Faculty Z, in Classroom W."
+SELECT CONCAT(
+    s.name, ' is enrolled in ', c.course_name,
+    ', taught by ', f.first_name, ' ', f.last_name,
+    ', in classroom ', cl.room_number, '.'
+) AS enrollment_sentence
+FROM Students s
+JOIN Student_Courses sc ON s.student_id = sc.student_id
+JOIN Courses c          ON sc.course_id = c.course_id
+JOIN Faculty f          ON c.faculty_id = f.faculty_id
+JOIN classroom cl       ON c.classroom_id = cl.classroom_id;
+
+-- Join 2: "Student X participates in Activity Y, advised by Faculty Z."
+SELECT CONCAT(
+    s.name, ' participates in ', a.activity_name,
+    ', advised by ', f.first_name, ' ', f.last_name, '.'
+) AS activity_sentence
+FROM Students s
+JOIN Student_Activities sa         ON s.student_id = sa.student_id
+JOIN Extra_Curricular_Activities a ON sa.activity_id = a.activity_id
+JOIN Faculty f                     ON a.faculty_advisor_id = f.faculty_id;
+
+-- Join 3 (our choice): "Faculty Z teaches Course Y in room W of the B building."
+SELECT CONCAT(
+    f.first_name, ' ', f.last_name,
+    ' teaches ', c.course_name,
+    ' in room ', cl.room_number,
+    ' of the ', cl.building, ' building.'
+) AS teaching_sentence
+FROM Faculty f
+JOIN Courses c    ON f.faculty_id = c.faculty_id
+JOIN classroom cl ON c.classroom_id = cl.classroom_id;
+
+-- Aggregate: how many students are enrolled in each course.
+SELECT c.course_name,
+       COUNT(sc.student_id) AS total_students
+FROM Courses c
+LEFT JOIN Student_Courses sc ON c.course_id = sc.course_id
+GROUP BY c.course_id, c.course_name
+ORDER BY total_students DESC;
+
+/*
+NORMALIZATION CHECK (group answer):
+We went through each table and we're confident the design is normalized to
+3NF. Every table sticks to one job -- students are only in Students, rooms
+only in classroom, faculty only in Faculty -- so we never store the same
+fact in two places. For example, Courses just keeps the faculty_id and
+classroom_id rather than copying the teacher's name or the building. That
+way, if a teacher's name changes, we only fix it once.
+
+For the many-to-many parts (a student can take many courses, and a course
+can have many students -- same idea with activities), we used the
+Student_Courses and Student_Activities junction tables instead of cramming
+a bunch of course columns into Students. Each row in those tables is just
+one student paired with one course or activity, and since the primary key
+is the two IDs together, you can't accidentally add the same pairing twice.
+
+The one thing we noticed is that Students.name puts the full name in a
+single column, which technically isn't fully atomic (1NF). Splitting it into
+first_name and last_name would be cleaner, but it doesn't affect any of the
+relationships, so we left it as is.
+*/
