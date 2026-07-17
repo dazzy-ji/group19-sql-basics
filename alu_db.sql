@@ -13,13 +13,19 @@ VALUES
 (103, '3c', 'RWANDA', 80),
 (104, '4d', 'NIGERIA', 105),
 (105, '5e', 'TANZANIA', 20);
-
+#update by David Ngure
 <<<<<<< HEAD
 UPDATE classroom
 SET capacity = 120
 WHERE classroom_id = 104;
 
+#select David Ngure
 SELECT * FROM classroom;
+
+#Delete  by David ngure
+DELETE FROM classroom
+WHERE classroom_id = 105;
+
 =======
 
 CREATE Table Students(
