@@ -1,4 +1,5 @@
 CREATE DATABASE ALU_DATABASE;
+
 CREATE TABLE classroom(
     classroom_id INT PRIMARY KEY,
     room_number VARCHAR(10),
@@ -13,7 +14,25 @@ VALUES
 (104, '4d', 'NIGERIA', 105),
 (105, '5e', 'TANZANIA', 20);
 
+<<<<<<< HEAD
 UPDATE classroom
 SET capacity = 120
 WHERE classroom_id = 104;
+=======
 
+CREATE Table Students(
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    classroom_id INT,
+    enrollment_date DATE
+);
+>>>>>>> 5f9cd554a56e2e1d2bbc4463bf840dd91534cd07
+
+INSERT INTO Students(student_id, name, email, classroom_id, enrollment_date) VALUES
+(001, 'Dazzy Indimuli', 'd.indimuli@alustudent.com', 101, '2026-01-07'),
+(002, 'David Ngure', 'd.wanjiku@alustudent.com', 101, '2026-01-10'),
+(003, 'Isaack Kariuki', 'i.kariuki@alustudent.com', 102, '2026-01-08'),
+(004, 'Philip Otieno', 'p.otieno@alustudent.com', 102, '2026-01-09'),
+(005, 'Arif Antulay', 'a.antulay@alustudent.com', 103, '2026-01-10'),
+(006, 'Eddy Mutoniwase', 'e.mutoniwas@alustudent.com', 103, '2026-01-06');
