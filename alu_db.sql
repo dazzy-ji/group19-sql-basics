@@ -111,3 +111,9 @@ VALUES
 (603, 'Coding Club',   'Technology',   4),
 (604, 'Art Society',   'Creative',     3),
 (605, 'Chess Club',    'Recreational', 1);
+
+
+UPDATE Extra_Curricular_Activities SET category = 'STEM' WHERE activity_id = 603;
+DELETE FROM Extra_Curricular_Activities WHERE activity_id = 605;
+
+SELECT activity_id, activity_name, category, faculty_advisor_id FROM Extra_Curricular_Activities WHERE category = 'Academic';
